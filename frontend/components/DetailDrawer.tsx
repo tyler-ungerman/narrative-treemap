@@ -1,22 +1,31 @@
 "use client";
 
 import { formatPercent, formatTime } from "@/lib/format";
-import { Topic } from "@/lib/types";
+import { DecisionItem, Topic } from "@/lib/types";
 import { Sparkline } from "./Sparkline";
 
 interface DetailDrawerProps {
   topic: Topic | null;
   allTopics: Topic[];
+  decisionEvidence?: DecisionItem | null;
   onClose: () => void;
   onSelectTopic: (topic: Topic) => void;
 }
 
-export function DetailDrawer({ topic, allTopics, onClose, onSelectTopic }: DetailDrawerProps) {
+export function DetailDrawer({
+  topic,
+  allTopics,
+  decisionEvidence,
+  onClose,
+  onSelectTopic
+}: DetailDrawerProps) {
   const relatedTopics = topic
     ? topic.related_topic_ids
         .map((relatedTopicId) => allTopics.find((candidate) => candidate.topic_id === relatedTopicId))
         .filter((candidate): candidate is Topic => Boolean(candidate))
     : [];
+
+  const trustWarnings = decisionEvidence?.trust_contract.warnings ?? topic?.trust_contract?.warnings ?? [];
 
   return (
     <aside className={`detail-drawer ${topic ? "is-open" : ""}`} aria-hidden={!topic}>
@@ -55,6 +64,51 @@ export function DetailDrawer({ topic, allTopics, onClose, onSelectTopic }: Detai
             <h3>Summary</h3>
             <p>{topic.summary}</p>
             <Sparkline values={topic.sparkline} className="drawer-sparkline" />
+          </section>
+
+          <section className="drawer-section">
+            <h3>Narrative-to-asset evidence</h3>
+            {decisionEvidence?.asset_mapping ? (
+              <div className="drawer-evidence">
+                <p>
+                  <strong>Theme:</strong> {decisionEvidence.asset_mapping.theme_name} ·{" "}
+                  {Math.round(decisionEvidence.asset_mapping.confidence * 100)}% confidence
+                </p>
+                <p>
+                  <strong>Trade mapping:</strong> {decisionEvidence.trade_direction}
+                  {decisionEvidence.trade_tickers.length > 0 ? ` ${decisionEvidence.trade_tickers.join(", ")}` : ""}
+                </p>
+                <p>{decisionEvidence.asset_mapping.evidence_summary}</p>
+                <div className="drawer-evidence-grid">
+                  <article>
+                    <span>Strong tokens</span>
+                    <p>{decisionEvidence.asset_mapping.matched_strong_tokens.slice(0, 8).join(", ") || "n/a"}</p>
+                  </article>
+                  <article>
+                    <span>Matched phrases</span>
+                    <p>{decisionEvidence.asset_mapping.matched_phrases.slice(0, 6).join(", ") || "n/a"}</p>
+                  </article>
+                  <article>
+                    <span>Headline evidence</span>
+                    <p>{decisionEvidence.asset_mapping.headline_evidence.slice(0, 6).join(", ") || "n/a"}</p>
+                  </article>
+                </div>
+              </div>
+            ) : (
+              <p>No direct asset mapping is available for this narrative yet.</p>
+            )}
+            {trustWarnings.length > 0 ? (
+              <div className="drawer-warning-list">
+                <p>
+                  <strong>Trust warnings</strong>
+                </p>
+                <ul>
+                  {trustWarnings.map((warning) => (
+                    <li key={warning}>{warning}</li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
           </section>
 
           <section className="drawer-section">

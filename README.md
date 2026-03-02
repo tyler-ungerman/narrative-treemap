@@ -10,6 +10,19 @@ Narrative Treemap helps you quickly see which stories are actually accelerating 
 - 100+ public no-key sources (global + local + domain-specific)
 - Local-first stack: FastAPI + SQLite + Next.js
 
+## Features array
+```ts
+const features = [
+  "Treemap + 3D narrative landscape",
+  "Action Center (trust-gated recommendations)",
+  "Decision Briefing (explicit next actions)",
+  "Backtest (7d/30d with warmup transparency)",
+  "Paper Portfolio (open risk + realized/unrealized P/L)",
+  "Alert Rules (threshold-based notifications)",
+  "Narrative-to-asset evidence + connection reasoning"
+];
+```
+
 ## Quick start (easy)
 ### 1) Install deps
 ```bash

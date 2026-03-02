@@ -354,6 +354,55 @@ a {
   background: rgba(56, 189, 248, 0.15);
 }
 
+.map-controls {
+  border: 1px solid var(--line);
+  border-radius: 0.85rem;
+  background: var(--bg-panel);
+  padding: 0.55rem 0.75rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.mode-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.mode-toggle span {
+  color: var(--text-muted);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.72rem;
+}
+
+.mode-toggle button,
+.map-drilldown-state button {
+  border: 1px solid var(--line);
+  border-radius: 0.52rem;
+  background: rgba(14, 22, 31, 0.9);
+  color: var(--text-muted);
+  padding: 0.28rem 0.5rem;
+  font-size: 0.74rem;
+  cursor: pointer;
+}
+
+.mode-toggle button.is-selected {
+  color: var(--text-primary);
+  border-color: rgba(56, 189, 248, 0.55);
+  background: rgba(56, 189, 248, 0.18);
+}
+
+.map-drilldown-state {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--text-muted);
+  font-size: 0.74rem;
+}
+
 .trending-strip {
   border: 1px solid var(--line);
   border-radius: 1rem;
@@ -431,6 +480,105 @@ a {
   font-size: 0.84rem;
 }
 
+.refresh-panel {
+  border: 1px solid var(--line);
+  border-radius: 0.95rem;
+  background: var(--bg-panel);
+  padding: 0.8rem;
+}
+
+.refresh-panel header h2 {
+  margin: 0.2rem 0;
+  font-size: 1rem;
+}
+
+.refresh-panel header p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+}
+
+.refresh-summary {
+  margin-top: 0.52rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.refresh-summary span {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(14, 22, 31, 0.9);
+  color: var(--text-muted);
+  padding: 0.18rem 0.46rem;
+  font-size: 0.7rem;
+  font-family: var(--font-mono), monospace;
+}
+
+.refresh-grid {
+  margin-top: 0.58rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55rem;
+}
+
+.refresh-grid article {
+  border: 1px solid var(--line);
+  border-radius: 0.7rem;
+  background: rgba(13, 21, 31, 0.9);
+  padding: 0.5rem;
+}
+
+.refresh-grid h3 {
+  margin: 0 0 0.38rem;
+  font-size: 0.82rem;
+}
+
+.refresh-grid ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.36rem;
+}
+
+.refresh-grid li {
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 0.55rem;
+  background: rgba(15, 24, 34, 0.9);
+  padding: 0.35rem 0.4rem;
+}
+
+.refresh-grid li button {
+  border: 0;
+  background: transparent;
+  color: var(--text-primary);
+  text-align: left;
+  padding: 0;
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.refresh-grid li button:hover {
+  text-decoration: underline;
+}
+
+.refresh-grid li span {
+  display: block;
+  margin-top: 0.18rem;
+  color: var(--text-muted);
+  font-size: 0.68rem;
+  font-family: var(--font-mono), monospace;
+}
+
+.refresh-empty {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.72rem;
+}
+
 .workspace {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 390px;
@@ -459,6 +607,258 @@ a {
   width: 100%;
   height: 100%;
   min-height: 620px;
+}
+
+.treemap-shell.mode-3d {
+  perspective: 1200px;
+  transform-style: preserve-3d;
+}
+
+.landscape-shell {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 620px;
+  background:
+    radial-gradient(circle at 20% 14%, rgba(56, 189, 248, 0.08), transparent 42%),
+    radial-gradient(circle at 75% 18%, rgba(251, 146, 60, 0.08), transparent 40%),
+    linear-gradient(160deg, #050a10, #0b1118 45%, #0a121c);
+}
+
+.landscape-shell.is-fullscreen,
+.landscape-shell:fullscreen,
+.landscape-shell:-webkit-full-screen {
+  width: 100vw;
+  height: 100vh;
+  min-height: 100vh;
+  border-radius: 0;
+}
+
+.landscape-shell.is-fullscreen,
+.landscape-shell:fullscreen,
+.landscape-shell:-webkit-full-screen {
+  width: 100vw;
+  height: 100vh;
+  min-height: 100vh;
+  border-radius: 0;
+}
+
+.landscape-fallback {
+  min-height: 620px;
+  border: 1px dashed rgba(148, 163, 184, 0.4);
+  border-radius: 0.8rem;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  color: var(--text-muted);
+  padding: 1rem;
+  background: rgba(8, 14, 21, 0.7);
+}
+
+.landscape-fallback p {
+  margin: 0.2rem 0;
+}
+
+.landscape-shell canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
+.landscape-canvas {
+  position: absolute;
+  inset: 0;
+}
+
+.landscape-legend {
+  position: absolute;
+  top: 0.65rem;
+  left: 0.75rem;
+  z-index: 20;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.42rem;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  border-radius: 999px;
+  background: rgba(7, 12, 18, 0.82);
+  color: var(--text-muted);
+  padding: 0.26rem 0.52rem;
+  font-size: 0.68rem;
+  font-family: var(--font-mono), monospace;
+}
+
+.landscape-strength-scale {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.landscape-strength-scale em {
+  font-style: normal;
+  font-size: 0.62rem;
+  opacity: 0.82;
+}
+
+.landscape-strength-scale-bar {
+  width: 72px;
+  height: 7px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #27344a, #7dd3fc);
+  border: 1px solid rgba(148, 163, 184, 0.28);
+}
+
+.landscape-actions {
+  position: absolute;
+  top: 0.65rem;
+  right: 0.75rem;
+  z-index: 20;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.landscape-actions button {
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  border-radius: 0.55rem;
+  background: rgba(7, 12, 18, 0.8);
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  font-family: var(--font-mono), monospace;
+  padding: 0.28rem 0.48rem;
+  cursor: pointer;
+}
+
+.landscape-actions button:hover {
+  border-color: rgba(56, 189, 248, 0.55);
+  color: var(--text-primary);
+}
+
+.landscape-hint {
+  position: absolute;
+  right: 0.75rem;
+  top: 2.82rem;
+  z-index: 20;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  border-radius: 999px;
+  background: rgba(7, 12, 18, 0.74);
+  color: var(--text-muted);
+  font-size: 0.67rem;
+  font-family: var(--font-mono), monospace;
+  padding: 0.24rem 0.5rem;
+}
+
+.landscape-tooltip {
+  position: absolute;
+  left: 0.8rem;
+  bottom: 0.8rem;
+  z-index: 20;
+  width: min(320px, calc(100% - 1.6rem));
+  border: 1px solid var(--line);
+  border-radius: 0.75rem;
+  background: rgba(7, 12, 18, 0.86);
+  padding: 0.55rem 0.62rem;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.72rem;
+}
+
+.landscape-tooltip strong {
+  display: block;
+  margin-bottom: 0.28rem;
+  font-family: var(--font-heading), sans-serif;
+}
+
+.landscape-tooltip p {
+  margin: 0.18rem 0 0;
+  color: var(--text-muted);
+}
+
+.landscape-node-label {
+  border: 1px solid rgba(125, 211, 252, 0.36);
+  border-radius: 999px;
+  background: rgba(8, 16, 26, 0.9);
+  color: #e2f3ff;
+  font-size: 0.68rem;
+  font-family: var(--font-mono), monospace;
+  padding: 0.18rem 0.42rem;
+  white-space: nowrap;
+}
+
+.landscape-connections {
+  position: absolute;
+  right: 0.8rem;
+  bottom: 0.8rem;
+  z-index: 20;
+  width: min(360px, calc(100% - 1.6rem));
+  border: 1px solid var(--line);
+  border-radius: 0.75rem;
+  background: rgba(7, 12, 18, 0.88);
+  padding: 0.55rem 0.6rem;
+}
+
+.landscape-connections h3 {
+  margin: 0;
+  font-size: 0.8rem;
+}
+
+.landscape-connections-subtitle {
+  margin: 0.28rem 0 0;
+  color: var(--text-muted);
+  font-size: 0.68rem;
+  font-family: var(--font-mono), monospace;
+}
+
+.landscape-connections ul {
+  margin: 0.45rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.landscape-connections li {
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 0.55rem;
+  background: rgba(10, 18, 29, 0.85);
+  padding: 0.35rem 0.42rem;
+}
+
+.landscape-connections li button {
+  border: 0;
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 0.73rem;
+  text-align: left;
+  padding: 0;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.landscape-connections li button:hover {
+  text-decoration: underline;
+}
+
+.landscape-connections li p {
+  margin: 0.2rem 0 0;
+  color: var(--text-muted);
+  font-size: 0.67rem;
+  font-family: var(--font-mono), monospace;
+}
+
+.landscape-connections li span {
+  display: block;
+  margin-top: 0.16rem;
+  color: #9ac0df;
+  font-size: 0.66rem;
+  font-family: var(--font-mono), monospace;
+}
+
+.landscape-connections-empty {
+  margin: 0.45rem 0 0;
+  color: var(--text-muted);
+  font-size: 0.72rem;
 }
 
 .treemap-legend {
@@ -509,6 +909,30 @@ a {
 .treemap-tile:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(8, 14, 22, 0.45);
+}
+
+.treemap-tile.is-3d {
+  transform: translateZ(calc(var(--tile-depth, 10px) * 0.2)) rotateX(1.8deg);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 14px 24px rgba(3, 8, 15, 0.38);
+}
+
+.treemap-tile.is-3d::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.14), rgba(0, 0, 0, 0.2));
+  mix-blend-mode: soft-light;
+}
+
+.treemap-tile.is-3d:hover {
+  transform: translateY(-3px) translateZ(var(--tile-depth, 10px)) rotateX(0.9deg);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.12),
+    0 20px 34px rgba(2, 6, 12, 0.5);
 }
 
 .treemap-tile.is-active {
@@ -730,6 +1154,55 @@ a {
   font-family: var(--font-mono), monospace;
   color: var(--text-muted);
   font-size: 0.65rem;
+}
+
+.drawer-evidence {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.drawer-evidence p {
+  margin: 0;
+}
+
+.drawer-evidence-grid {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.drawer-evidence-grid article {
+  border: 1px solid var(--line);
+  border-radius: 0.62rem;
+  background: rgba(14, 22, 31, 0.88);
+  padding: 0.42rem 0.5rem;
+}
+
+.drawer-evidence-grid article span {
+  display: block;
+  color: var(--text-muted);
+  font-size: 0.66rem;
+  font-family: var(--font-mono), monospace;
+  margin-bottom: 0.16rem;
+}
+
+.drawer-warning-list {
+  margin-top: 0.48rem;
+  border: 1px solid rgba(251, 146, 60, 0.35);
+  border-radius: 0.65rem;
+  background: rgba(124, 45, 18, 0.22);
+  padding: 0.45rem 0.55rem;
+}
+
+.drawer-warning-list p {
+  color: #fdba74;
+}
+
+.drawer-warning-list ul {
+  margin: 0.3rem 0 0;
+  padding-left: 1rem;
+  color: #fed7aa;
+  font-size: 0.73rem;
 }
 
 .chip-wrap {
@@ -1538,6 +2011,10 @@ a {
   .alert-form-grid {
     grid-template-columns: 1fr;
   }
+
+  .refresh-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 780px) {
@@ -1576,11 +2053,50 @@ a {
     min-width: 0;
   }
 
+  .map-controls {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .map-drilldown-state {
+    margin-left: 0;
+    flex-wrap: wrap;
+  }
+
   .treemap-column,
   .loading-state,
   .treemap-empty,
-  .treemap-shell {
+  .treemap-shell,
+  .landscape-shell {
     min-height: 520px;
+  }
+
+  .landscape-hint {
+    top: auto;
+    bottom: 10.75rem;
+    right: 0.75rem;
+  }
+
+  .landscape-actions {
+    top: 2.6rem;
+    right: 0.75rem;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .landscape-connections,
+  .landscape-tooltip {
+    left: 0.75rem;
+    right: 0.75rem;
+    width: auto;
+  }
+
+  .landscape-tooltip {
+    bottom: 0.75rem;
+  }
+
+  .landscape-connections {
+    bottom: 5.9rem;
   }
 
   .action-header {

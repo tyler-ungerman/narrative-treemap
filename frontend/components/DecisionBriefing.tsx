@@ -24,6 +24,29 @@ const PROFILE_OPTIONS: Array<{ value: DecisionProfile; label: string; descriptio
   { value: "operations", label: "Operations", description: "Prioritizes sustained volume and execution risk." },
   { value: "security", label: "Security", description: "Prioritizes fast-moving and high-confidence threats." }
 ];
+const TOP_N_OPTIONS = [10, 15, 20, 25, 30, 40] as const;
+
+function parseInitialProfile(): DecisionProfile {
+  if (typeof window === "undefined") {
+    return "investor";
+  }
+  const raw = new URLSearchParams(window.location.search).get("briefing_profile");
+  if (raw === "investor" || raw === "research" || raw === "operations" || raw === "security") {
+    return raw;
+  }
+  return "investor";
+}
+
+function parseInitialTopN(): number {
+  if (typeof window === "undefined") {
+    return 15;
+  }
+  const raw = Number(new URLSearchParams(window.location.search).get("briefing_top_n"));
+  if (TOP_N_OPTIONS.includes(raw as (typeof TOP_N_OPTIONS)[number])) {
+    return raw;
+  }
+  return 15;
+}
 
 function escapeCsvCell(value: string | number): string {
   const asString = String(value);
@@ -207,13 +230,14 @@ function isUnresolvedDecision(decision: DecisionItem): boolean {
 }
 
 export function DecisionBriefing({ filters, topics, onInspectTopic }: DecisionBriefingProps) {
-  const [profile, setProfile] = useState<DecisionProfile>("investor");
-  const [topN, setTopN] = useState(15);
+  const [profile, setProfile] = useState<DecisionProfile>(parseInitialProfile);
+  const [topN, setTopN] = useState<number>(parseInitialTopN);
   const [briefing, setBriefing] = useState<DecisionBriefingResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [copyState, setCopyState] = useState<"idle" | "copied" | "failed">("idle");
+  const [shareState, setShareState] = useState<"idle" | "copied" | "failed">("idle");
 
   useEffect(() => {
     let cancelled = false;
@@ -244,6 +268,15 @@ export function DecisionBriefing({ filters, topics, onInspectTopic }: DecisionBr
     };
   }, [filters, profile, topN]);
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const url = new URL(window.location.href);
+    url.searchParams.set("view", "briefing");
+    url.searchParams.set("briefing_profile", profile);
+    url.searchParams.set("briefing_top_n", String(topN));
+    window.history.replaceState({}, "", `${url.pathname}${url.search}${url.hash}`);
+  }, [profile, topN]);
+
   const topicById = useMemo(() => new Map(topics.map((topic) => [topic.topic_id, topic])), [topics]);
   const visibleDecisions = useMemo(
     () => briefing?.decisions.filter((decision) => decision.action_bucket !== "Ignore") ?? [],
@@ -263,6 +296,28 @@ export function DecisionBriefing({ filters, topics, onInspectTopic }: DecisionBr
       setCopyState("failed");
     } finally {
       window.setTimeout(() => setCopyState("idle"), 2200);
+    }
+  };
+
+  const copyShareLink = async () => {
+    if (typeof window === "undefined" || typeof navigator === "undefined" || !navigator.clipboard?.writeText) {
+      setShareState("failed");
+      if (typeof window !== "undefined") {
+        window.setTimeout(() => setShareState("idle"), 2200);
+      }
+      return;
+    }
+    try {
+      const url = new URL(window.location.href);
+      url.searchParams.set("view", "briefing");
+      url.searchParams.set("briefing_profile", profile);
+      url.searchParams.set("briefing_top_n", String(topN));
+      await navigator.clipboard.writeText(url.toString());
+      setShareState("copied");
+    } catch {
+      setShareState("failed");
+    } finally {
+      window.setTimeout(() => setShareState("idle"), 2200);
     }
   };
 
@@ -323,7 +378,7 @@ export function DecisionBriefing({ filters, topics, onInspectTopic }: DecisionBr
         <label className="decision-topn-control">
           Top decisions
           <select value={topN} onChange={(event) => setTopN(Number(event.target.value))}>
-            {[10, 15, 20, 25, 30, 40].map((value) => (
+            {TOP_N_OPTIONS.map((value) => (
               <option key={value} value={value}>
                 {value}
               </option>
@@ -541,7 +596,20 @@ export function DecisionBriefing({ filters, topics, onInspectTopic }: DecisionBr
               <button type="button" onClick={downloadCsv} disabled={visibleDecisions.length === 0}>
                 Download CSV
               </button>
-              <span>{copyState === "copied" ? "Copied" : copyState === "failed" ? "Copy failed" : ""}</span>
+              <button type="button" onClick={copyShareLink}>
+                Copy share link
+              </button>
+              <span>
+                {copyState === "copied"
+                  ? "Brief copied"
+                  : copyState === "failed"
+                    ? "Brief copy failed"
+                    : shareState === "copied"
+                      ? "Share link copied"
+                      : shareState === "failed"
+                        ? "Share copy failed"
+                        : ""}
+              </span>
             </div>
             <p className="decision-export-note">
               Profile: <strong>{briefing.summary.profile}</strong> · Top N: <strong>{briefing.summary.top_n}</strong>

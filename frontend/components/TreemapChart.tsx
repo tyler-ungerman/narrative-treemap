@@ -1,7 +1,7 @@
 "use client";
 
 import { hierarchy, treemap } from "d3-hierarchy";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { CSSProperties, useEffect, useMemo, useRef, useState } from "react";
 
 import { formatPercent } from "@/lib/format";
 import { Topic, TreemapDensityOption } from "@/lib/types";
@@ -11,6 +11,8 @@ interface TreemapChartProps {
   topics: Topic[];
   selectedTopicId: string | null;
   density: TreemapDensityOption;
+  renderMode?: "2d" | "3d";
+  legendNote?: string | null;
   onSelectTopic: (topic: Topic) => void;
 }
 
@@ -196,14 +198,14 @@ function layoutTiles(topics: Topic[], size: TreemapSize, topInset: number): Tile
 
   return layoutRoot
     .leaves()
-      .map((leaf) => ({
-        topic: leaf.data as Topic,
-        x0: leaf.x0,
-        x1: leaf.x1,
-        y0: leaf.y0 + topInset,
-        y1: leaf.y1 + topInset
-      }))
-      .filter((tile) => tile.x1 - tile.x0 > 8 && tile.y1 - tile.y0 > 8);
+    .map((leaf) => ({
+      topic: leaf.data as Topic,
+      x0: leaf.x0,
+      x1: leaf.x1,
+      y0: leaf.y0 + topInset,
+      y1: leaf.y1 + topInset
+    }))
+    .filter((tile) => tile.x1 - tile.x0 > 8 && tile.y1 - tile.y0 > 8);
 }
 
 function isUnreadableTile(
@@ -234,7 +236,14 @@ function dedupeTopicsById(topics: Topic[]): Topic[] {
   return result;
 }
 
-export function TreemapChart({ topics, selectedTopicId, density, onSelectTopic }: TreemapChartProps) {
+export function TreemapChart({
+  topics,
+  selectedTopicId,
+  density,
+  renderMode = "2d",
+  legendNote,
+  onSelectTopic
+}: TreemapChartProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [size, setSize] = useState<TreemapSize>({ width: 800, height: 540 });
   const [hoveredTopicId, setHoveredTopicId] = useState<string | null>(null);
@@ -276,7 +285,6 @@ export function TreemapChart({ topics, selectedTopicId, density, onSelectTopic }
     const minimumArea = minimumReadableArea(chartAreaSize, density);
 
     let workingTopics = [...limitedTopics];
-    const removedTopicIds = new Set<string>();
 
     for (let iteration = 0; iteration < MAX_PRUNE_ITERATIONS; iteration += 1) {
       if (workingTopics.length <= MIN_VISIBLE_TOPICS) {
@@ -307,7 +315,6 @@ export function TreemapChart({ topics, selectedTopicId, density, onSelectTopic }
       }
 
       const removeIds = new Set(removable.map((topic) => topic.topic_id));
-      removable.forEach((topic) => removedTopicIds.add(topic.topic_id));
       workingTopics = workingTopics.filter((topic) => !removeIds.has(topic.topic_id));
     }
 
@@ -338,14 +345,14 @@ export function TreemapChart({ topics, selectedTopicId, density, onSelectTopic }
   const hoveredTopic = visibleTopics.find((topic) => topic.topic_id === hoveredTopicId) ?? null;
 
   return (
-    <div className="treemap-shell" ref={containerRef}>
+    <div className={`treemap-shell ${renderMode === "3d" ? "mode-3d" : ""}`} ref={containerRef}>
       <div className="treemap-legend">
         <span>Momentum</span>
         <div className="legend-bar" />
         <span>Cool</span>
         <span>Hot</span>
         <span className="legend-note">
-          {hiddenTopicCount > 0 ? `${hiddenTopicCount} hidden` : "Relative view"}
+          {legendNote ?? (hiddenTopicCount > 0 ? `${hiddenTopicCount} hidden` : "Relative view")}
         </span>
       </div>
 
@@ -361,18 +368,24 @@ export function TreemapChart({ topics, selectedTopicId, density, onSelectTopic }
               ? "medium"
               : "large";
 
+        const tileDepth = renderMode === "3d" ? clamp(Math.round(6 + (relativeMomentum + 1) * 7), 6, 20) : 0;
+        const tileStyle: CSSProperties & { [key: string]: string | number } = {
+          left: tile.x0,
+          top: tile.y0,
+          width,
+          height,
+          backgroundColor: momentumColor(relativeMomentum)
+        };
+        if (renderMode === "3d") {
+          tileStyle["--tile-depth"] = `${tileDepth}px`;
+        }
+
         return (
           <button
             key={tile.topic.topic_id}
             type="button"
-            className={`treemap-tile tile-${tileMode} ${selectedTopicId === tile.topic.topic_id ? "is-active" : ""}`}
-            style={{
-              left: tile.x0,
-              top: tile.y0,
-              width,
-              height,
-              backgroundColor: momentumColor(relativeMomentum)
-            }}
+            className={`treemap-tile tile-${tileMode} ${renderMode === "3d" ? "is-3d" : ""} ${selectedTopicId === tile.topic.topic_id ? "is-active" : ""}`}
+            style={tileStyle}
             onClick={() => onSelectTopic(tile.topic)}
             onMouseEnter={() => setHoveredTopicId(tile.topic.topic_id)}
             onMouseLeave={() => setHoveredTopicId((prev) => (prev === tile.topic.topic_id ? null : prev))}
