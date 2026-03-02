@@ -1,0 +1,307 @@
+{
+  "topics": [
+    {
+      "topic_id": "seed-tech-ai",
+      "label": "Tech: AI Models",
+      "vertical": "tech",
+      "volume_now": 32,
+      "volume_prev": 18,
+      "momentum": 0.7778,
+      "novelty": 0.46,
+      "diversity": 4,
+      "sparkline": [0, 1, 2, 2, 3, 2, 4, 5, 4, 3, 3, 3],
+      "representative_items": [
+        {
+          "title": "Open-source agents gain traction in developer workflows",
+          "url": "https://example.com/tech/agents",
+          "source_name": "hackernews",
+          "published_at": "2026-02-25T14:20:00+00:00"
+        },
+        {
+          "title": "Top GitHub repositories this week focus on retrieval and evals",
+          "url": "https://example.com/tech/github-trending",
+          "source_name": "github_trending",
+          "published_at": "2026-02-25T13:48:00+00:00"
+        },
+        {
+          "title": "Lobsters discussion: prompt caching strategies",
+          "url": "https://example.com/tech/lobsters-prompts",
+          "source_name": "lobsters",
+          "published_at": "2026-02-25T12:40:00+00:00"
+        }
+      ],
+      "keywords": ["ai", "models", "agents", "inference", "evaluation"],
+      "entities": ["GitHub", "Open Source"],
+      "related_topic_ids": ["seed-programming-rust", "seed-security-breach"],
+      "summary": "AI tooling and model infrastructure are accelerating, with heavy attention on agent frameworks, inference efficiency, and evaluation quality."
+    },
+    {
+      "topic_id": "seed-world-conflict",
+      "label": "World: Border Tensions",
+      "vertical": "world",
+      "volume_now": 26,
+      "volume_prev": 24,
+      "momentum": 0.0833,
+      "novelty": 0.29,
+      "diversity": 3,
+      "sparkline": [1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 2],
+      "representative_items": [
+        {
+          "title": "Diplomatic talks resume after overnight shelling",
+          "url": "https://example.com/world/diplomatic-talks",
+          "source_name": "bbc_world",
+          "published_at": "2026-02-25T13:22:00+00:00"
+        },
+        {
+          "title": "Regional leaders call for monitored ceasefire",
+          "url": "https://example.com/world/ceasefire",
+          "source_name": "aljazeera",
+          "published_at": "2026-02-25T12:50:00+00:00"
+        }
+      ],
+      "keywords": ["ceasefire", "border", "diplomacy", "security"],
+      "entities": ["United Nations", "Regional Leaders"],
+      "related_topic_ids": ["seed-markets-energy"],
+      "summary": "Coverage remains elevated around border incidents and ceasefire proposals, with policy and humanitarian angles driving updates."
+    },
+    {
+      "topic_id": "seed-science-fusion",
+      "label": "Science: Fusion Progress",
+      "vertical": "science",
+      "volume_now": 19,
+      "volume_prev": 11,
+      "momentum": 0.7273,
+      "novelty": 0.51,
+      "diversity": 3,
+      "sparkline": [0, 0, 1, 1, 1, 2, 2, 3, 3, 2, 2, 2],
+      "representative_items": [
+        {
+          "title": "New confinement approach improves plasma stability",
+          "url": "https://example.com/science/plasma-stability",
+          "source_name": "arxiv_physics",
+          "published_at": "2026-02-25T11:30:00+00:00"
+        },
+        {
+          "title": "Material breakthrough helps reactor wall durability",
+          "url": "https://example.com/science/reactor-material",
+          "source_name": "sciencedaily",
+          "published_at": "2026-02-25T09:50:00+00:00"
+        }
+      ],
+      "keywords": ["fusion", "plasma", "reactor", "confinement"],
+      "entities": ["National Laboratory"],
+      "related_topic_ids": ["seed-tech-ai"],
+      "summary": "Fusion research is trending up as publications highlight improved plasma control and more resilient reactor materials."
+    },
+    {
+      "topic_id": "seed-markets-energy",
+      "label": "Markets: Energy Volatility",
+      "vertical": "markets",
+      "volume_now": 21,
+      "volume_prev": 30,
+      "momentum": -0.3,
+      "novelty": 0.22,
+      "diversity": 3,
+      "sparkline": [3, 3, 2, 2, 2, 2, 1, 1, 1, 1, 2, 1],
+      "representative_items": [
+        {
+          "title": "Oil prices slip after inventory surprise",
+          "url": "https://example.com/markets/oil-slip",
+          "source_name": "yahoo_finance",
+          "published_at": "2026-02-25T14:05:00+00:00"
+        },
+        {
+          "title": "Power utilities hedge exposure ahead of demand spike",
+          "url": "https://example.com/markets/utilities-hedge",
+          "source_name": "cnbc",
+          "published_at": "2026-02-25T10:40:00+00:00"
+        }
+      ],
+      "keywords": ["oil", "gas", "inventory", "hedging", "utilities"],
+      "entities": ["OPEC", "Federal Reserve"],
+      "related_topic_ids": ["seed-world-conflict"],
+      "summary": "Energy-market narratives remain active but momentum is cooling compared with the previous window."
+    },
+    {
+      "topic_id": "seed-security-breach",
+      "label": "Security: Enterprise Breaches",
+      "vertical": "security",
+      "volume_now": 16,
+      "volume_prev": 8,
+      "momentum": 1.0,
+      "novelty": 0.58,
+      "diversity": 2,
+      "sparkline": [0, 1, 1, 1, 2, 2, 2, 2, 2, 1, 1, 1],
+      "representative_items": [
+        {
+          "title": "Ransomware gang targets managed service providers",
+          "url": "https://example.com/security/msp-ransomware",
+          "source_name": "the_hacker_news",
+          "published_at": "2026-02-25T13:15:00+00:00"
+        },
+        {
+          "title": "Credential stuffing campaign expands to healthcare portals",
+          "url": "https://example.com/security/credential-stuffing",
+          "source_name": "krebs_security",
+          "published_at": "2026-02-25T11:05:00+00:00"
+        }
+      ],
+      "keywords": ["ransomware", "identity", "credentials", "msp"],
+      "entities": ["CISA"],
+      "related_topic_ids": ["seed-tech-ai"],
+      "summary": "Security chatter is sharply rising around ransomware and identity abuse, especially attacks on service providers."
+    },
+    {
+      "topic_id": "seed-sports-transfer",
+      "label": "Sports: Transfer Rumors",
+      "vertical": "sports",
+      "volume_now": 14,
+      "volume_prev": 10,
+      "momentum": 0.4,
+      "novelty": 0.18,
+      "diversity": 2,
+      "sparkline": [0, 1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 1],
+      "representative_items": [
+        {
+          "title": "Late-window move could reshape title race",
+          "url": "https://example.com/sports/title-race",
+          "source_name": "bbc_sport",
+          "published_at": "2026-02-25T12:00:00+00:00"
+        },
+        {
+          "title": "Front office confirms talks with veteran striker",
+          "url": "https://example.com/sports/transfer-talks",
+          "source_name": "espn",
+          "published_at": "2026-02-25T09:30:00+00:00"
+        }
+      ],
+      "keywords": ["transfer", "contract", "club", "window"],
+      "entities": ["Premier League"],
+      "related_topic_ids": ["seed-entertainment-boxoffice"],
+      "summary": "Transfer narratives are climbing as clubs make final roster moves ahead of key fixtures."
+    },
+    {
+      "topic_id": "seed-entertainment-boxoffice",
+      "label": "Entertainment: Box Office",
+      "vertical": "entertainment",
+      "volume_now": 12,
+      "volume_prev": 7,
+      "momentum": 0.7143,
+      "novelty": 0.34,
+      "diversity": 2,
+      "sparkline": [0, 0, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1],
+      "representative_items": [
+        {
+          "title": "Franchise sequel opens above expectations",
+          "url": "https://example.com/entertainment/sequel-open",
+          "source_name": "variety",
+          "published_at": "2026-02-25T11:45:00+00:00"
+        },
+        {
+          "title": "Studios shift release calendars for summer slate",
+          "url": "https://example.com/entertainment/release-calendar",
+          "source_name": "ign",
+          "published_at": "2026-02-25T08:10:00+00:00"
+        }
+      ],
+      "keywords": ["box office", "release", "franchise", "studios"],
+      "entities": ["Hollywood"],
+      "related_topic_ids": ["seed-sports-transfer", "seed-gaming-liveops"],
+      "summary": "Box-office momentum is rising after stronger-than-expected openings and revised release strategies."
+    },
+    {
+      "topic_id": "seed-health-outbreak",
+      "label": "Health: Outbreak Monitoring",
+      "vertical": "health",
+      "volume_now": 11,
+      "volume_prev": 9,
+      "momentum": 0.2222,
+      "novelty": 0.27,
+      "diversity": 2,
+      "sparkline": [0, 0, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1],
+      "representative_items": [
+        {
+          "title": "WHO updates surveillance guidance for respiratory spikes",
+          "url": "https://example.com/health/who-guidance",
+          "source_name": "who_news",
+          "published_at": "2026-02-25T10:20:00+00:00"
+        },
+        {
+          "title": "CDC issues advisory on regional case clusters",
+          "url": "https://example.com/health/cdc-advisory",
+          "source_name": "cdc_newsroom",
+          "published_at": "2026-02-25T07:55:00+00:00"
+        }
+      ],
+      "keywords": ["surveillance", "outbreak", "advisory", "cases"],
+      "entities": ["WHO", "CDC"],
+      "related_topic_ids": ["seed-world-conflict"],
+      "summary": "Health coverage is modestly increasing around surveillance updates and localized case clusters."
+    },
+    {
+      "topic_id": "seed-gaming-liveops",
+      "label": "Gaming: Live Ops",
+      "vertical": "gaming",
+      "volume_now": 10,
+      "volume_prev": 5,
+      "momentum": 1.0,
+      "novelty": 0.49,
+      "diversity": 2,
+      "sparkline": [0, 0, 0, 1, 1, 1, 1, 1, 2, 1, 1, 1],
+      "representative_items": [
+        {
+          "title": "Major update introduces seasonal progression overhaul",
+          "url": "https://example.com/gaming/seasonal-update",
+          "source_name": "pcgamer",
+          "published_at": "2026-02-25T12:25:00+00:00"
+        },
+        {
+          "title": "Publisher expands cross-platform event roadmap",
+          "url": "https://example.com/gaming/event-roadmap",
+          "source_name": "ign",
+          "published_at": "2026-02-25T09:15:00+00:00"
+        }
+      ],
+      "keywords": ["update", "seasonal", "event", "roadmap"],
+      "entities": ["Steam"],
+      "related_topic_ids": ["seed-entertainment-boxoffice"],
+      "summary": "Gaming conversations are accelerating around live-ops roadmaps, seasonal systems, and engagement updates."
+    },
+    {
+      "topic_id": "seed-programming-rust",
+      "label": "Programming: Language Releases",
+      "vertical": "programming",
+      "volume_now": 9,
+      "volume_prev": 6,
+      "momentum": 0.5,
+      "novelty": 0.37,
+      "diversity": 2,
+      "sparkline": [0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      "representative_items": [
+        {
+          "title": "Rust announces tooling improvements for package workflows",
+          "url": "https://example.com/programming/rust-tooling",
+          "source_name": "rust_blog",
+          "published_at": "2026-02-25T11:00:00+00:00"
+        },
+        {
+          "title": "Python core team previews upcoming standard library refinements",
+          "url": "https://example.com/programming/python-stdlib",
+          "source_name": "python_blog",
+          "published_at": "2026-02-25T08:45:00+00:00"
+        }
+      ],
+      "keywords": ["release", "tooling", "stdlib", "language"],
+      "entities": ["Python", "Rust"],
+      "related_topic_ids": ["seed-tech-ai"],
+      "summary": "Programming feeds highlight incremental language and tooling releases with practical workflow improvements."
+    }
+  ],
+  "metadata": {
+    "generated_at": "2026-02-25T15:00:00+00:00",
+    "window": "1h",
+    "item_count": 54,
+    "source_health": [],
+    "algorithm": "seed-demo"
+  }
+}
