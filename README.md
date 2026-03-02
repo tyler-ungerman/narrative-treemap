@@ -30,9 +30,6 @@ make dev
 ```bash
 make backend-dev
 make frontend-dev
-make backend-test
-make docker-up
-make docker-down
 ```
 
 ## Project layout
